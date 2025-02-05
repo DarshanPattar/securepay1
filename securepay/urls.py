@@ -26,4 +26,5 @@ urlpatterns = [
     path('accept/',accept_propose),
     path('logout/',logout, name='logout'),
     path('delmem/',delmem),
+    path('cmanager/',cmanager),
 ]

@@ -56,3 +56,7 @@ def login(request):
         except Member.DoesNotExist:
             return render(request,'login.html',{'error':'Invalid username or password'})
     return render(request,'login.html')
+
+
+def cmanager(request):
+    return render(request,'cmanager.html')

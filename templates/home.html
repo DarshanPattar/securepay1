@@ -30,6 +30,17 @@
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             height: fit-content;
+            margin-bottom: 20px;
+        }
+        .profile-card1 {
+            width: 300px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+            margin-bottom: 20px;
+            margin-top: 20px;
         }
         .option-box {
             padding: 20px;
@@ -67,24 +78,24 @@
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="main-content">
-            <h1>Welcome to Our Platform</h1>
+<div class="container">
+    <div class="main-content">
+        <h1>Welcome to SecurePay</h1>
             
-            <div class="option-box propose-option">
-                <h2>Propose a New Item</h2>
-                <p>Have something to offer? Create a new proposal and share it with others.</p>
-                <a href="/propose" class="button">Make a Proposal</a>
-            </div>
-
-            <div class="option-box accept-option">
-                <h2>Accept Proposals</h2>
-                <p>Browse through available proposals and accept the ones you're interested in.</p>
-                <a href="/accept" class="button">accept</a>
-            </div>
+        <div class="option-box propose-option">
+            <h2>Propose a New Transaction</h2>
+            <p>Wnat to propose a transaction to someone?</p>
+            <a href="/propose" class="button">Make a Proposal</a>
         </div>
+
+        <div class="option-box accept-option">
+            <h2>Accept Proposals</h2>
+            <p>Someone sent you a proposal! Want to accept??</p>
+            <a href="/accept" class="button">accept</a>
+        </div>
+    </div>
         
+    <div>
         <div class="profile-card">
             <h2>Profile</h2>
             <div class="profile-info">
@@ -94,8 +105,19 @@
             </div>
             <a href="/logout" class="button">Logout</a>
         </div>
-
         
+        <div class="profile-card">
+            <p>Want to get more Coins?</p>
+            <a href="/cmanager/" class="button">Get Coins</a>
+        </div>
     </div>
+        
+</div>
+<div class="container">
+    <div class="profile-card1">
+        <h2>Transactions</h2>
+    </div>
+</div>
+
 </body>
 </html>
