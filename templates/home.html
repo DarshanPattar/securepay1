@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 20px;
+        }
+        .main-content {
+            flex: 1;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .profile-card {
+            width: 300px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+        .option-box {
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+        .option-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .propose-option {
+            background-color: #e3f2fd;
+        }
+        .accept-option {
+            background-color: #e8f5e9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #1976d2;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #1565c0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <h1>Welcome to Our Platform</h1>
+            
+            <div class="option-box propose-option">
+                <h2>Propose a New Item</h2>
+                <p>Have something to offer? Create a new proposal and share it with others.</p>
+                <a href="/propose" class="button">Make a Proposal</a>
+            </div>
+
+            <div class="option-box accept-option">
+                <h2>Accept Proposals</h2>
+                <p>Browse through available proposals and accept the ones you're interested in.</p>
+                <a href="/accept" class="button">accept</a>
+            </div>
+        </div>
+        
+        <div class="profile-card">
+            <h2>Profile</h2>
+            <div class="profile-info">
+                <p><strong>Name:</strong> {{member.name}}</p>
+                <p><strong>Unique Name:</strong> {{member.unique_name}}</p>
+                <p><strong>Member ID:</strong>{{member.unique_id}}</p>
+            </div>
+            <a href="/logout" class="button">Logout</a>
+        </div>
+
+        
+    </div>
+</body>
+</html>

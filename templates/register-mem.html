@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Member</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; /* Horizontally center content */
+            align-items: center; /* Vertically center content */
+            min-height: 100vh; /* Ensure full viewport height */
+            background-color: #f4f4f4; /* Light gray background */
+            font-family: sans-serif;
+        }
+
+        .payment-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            width: 500px; /* Adjust width as needed */
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333; /* Darker heading color */
+        }
+
+        .input-group {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            width: 150px;
+            margin-right: 10px;
+            text-align: left;
+            font-weight: bold; /* Make labels bolder */
+            color: #555; /* Slightly darker label color */
+        }
+
+        .input-group input[type="text"],
+        .input-group input[type="number"],
+        .input-group select,
+        .input-group textarea {
+            flex-grow: 1;
+            width: calc(100% - 160px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .input-group textarea {
+            resize: vertical;
+            height: 80px;
+        }
+
+        button {
+            background-color: #007bff; /* Blue button */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%; /* Full-width button */
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        .error-message {
+            color: red;
+            font-size: smaller;
+            margin-top: 5px;
+        }
+
+        .success-message {
+            color: green;
+            font-size: smaller;
+            margin-top: 5px;
+        }
+        .text{
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+    
+</head>
+<body>
+
+    <div class="payment-container">
+        <h2>Register Member</h2>
+        <form id="memberForm" method="post" action="/register/">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="memberName" >Member Name:</label>
+                <input type="text" name="name" id="memberName" required>
+
+            </div>
+
+            <div class="input-group">
+                <label for="memberAddress">Member Address:</label>
+                <textarea id="memberAddress" name="address" required></textarea>
+
+            </div>
+
+            <div class="input-group">
+                <label for="memberAffiliation">Member Affiliation:</label>
+                <input type="text" name="affiliation" id="memberAffiliation">
+            </div>
+
+            <div class="input-group">
+                <label for="category">Category:</label>
+                <select id="category" name="category">                        
+                    <option value="upto10k">10k</option>
+                    <option value="abovetill100k">10k to 100k</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="memberUniqueName">Member Unique Name:</label>
+                <input type="text" id="memberUniqueName" name="unique_name" required>
+
+            </div>
+            <div class="input-group">
+                <label>Password:</label>
+                <input type="password" id="password" name="password" required>
+
+            </div>
+            <div class="input-group">
+                <label>Confirm Password:</label>
+                <input type="password" id="cpassword" name="cpassword" required>
+
+            </div>
+
+
+            <button type="submit">Register</button>
+
+            <div id="registrationStatus" class="success-message"></div>
+            <div id="generalError" class="error-message"></div>
+            <p class="text">Already a Memeber?<a href="/login">login</a></p>
+
+        </form>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receive Transaction</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: aliceblue;
+        }
+        .rec-container{
+            width: 500px;
+            padding: 50px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-elem{
+            margin-bottom: 15px;
+        }
+        .form-elem input{
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(22, 127, 197, 0.1);
+        }
+        .form-elem input[type="submit"]{
+            background-color: #007bff;
+        }
+        .btn{
+            background-color: #007bff;
+            color: #fff;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+        }
+        .btn:hover{
+            background-color: #003a79;
+        }
+       </style>
+</head>
+<body>
+    <div class="rec-container">
+        <h1>Accept Transaction?</h1>
+        <form class="receiver">
+            <div class="form-elem">
+                <input type="number" placeholder="Proposer ID" name="pid">
+            </div>
+            <div class="form-elem">
+                <input type="text" placeholder="Proposer name" name="pname">
+            </div>
+            <div class="form-elem">
+                <input type="number" placeholder="Proposed Transaction ID" name="ptid">
+            </div>
+            <div class="form-elem">
+                <input type="text" placeholder="Enter Security text" name="st">
+            </div>
+            <button class="btn" type="submit" name="submit">Accept </button>
+        </form>
+
+    </div>
+</body>
+</html>

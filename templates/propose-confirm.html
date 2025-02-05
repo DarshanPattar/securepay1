@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accept Proposed Transaction</title>
+    <Style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: aliceblue;
+        }
+        .form-container{
+            width: 500px;
+            padding: 50px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group{
+            margin-bottom: 15px;
+        }
+        .form-group input{
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(22, 127, 197, 0.1);
+        }
+        .form-group input[type="submit"]{
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        .btn{
+            background-color: #007bff;
+            color: #fff;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover{
+            background-color: #023e80;
+        }
+    </Style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Proposer</h1>
+        <form action="" method="post">
+            <div class="form-group">
+                <input type="text" placeholder="Transaction ID" name="tct">
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="Transaction debit from" name="tbf">
+            </div>
+            <div class="form-group">
+                <input type="number" placeholder="Transaction Ammount" name="tam">
+            </div>
+            <button class="btn" type="submit" name="submit">Proceed</button>
+        </form>
+    </div>
+</body>
+</html>
