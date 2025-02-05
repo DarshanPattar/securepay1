@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Member
+from .models import *
 # Create your views here.
 def register(request):
     if request.method=='POST':
@@ -37,6 +37,14 @@ def logout(request):
     return redirect('register')
 
 def propose(request):
+    if request.method=='POST':
+        fromid=request.POST['fromid']
+        fname=request.POST['fname']
+        toid=request.POST['toid']
+        toname=request.POST['toname']
+        amount=request.POST['amount']
+        proposer=Proposer(fromid=fromid,fname=fname,toid=toid,toname=toname,amount=amount)
+        proposer.save()
     return render(request,'proposer.html')
 
 def receive(request):
@@ -59,4 +67,13 @@ def login(request):
 
 
 def cmanager(request):
+    if request.method=='POST':
+        memid=request.POST['memid']
+        memname=request.POST['memname']
+        amount=request.POST['amount']
+        cmanager=Cmanager(memid=memid,memname=memname,amount=amount)
+        cmanager.save()
+        ob=Member.objects.get(id=memid)
+        ob.balance=ob.balance+amount    
+        ob.save()
     return render(request,'cmanager.html')
