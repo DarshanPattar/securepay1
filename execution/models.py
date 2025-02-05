@@ -12,6 +12,7 @@ class Member(models.Model):
     category=models.CharField(max_length=100,choices=cho,default='upto10k')
     password=models.CharField(max_length=100)
     balance=models.IntegerField(default=0)
+    intransaction=models.IntegerField(default=0)
     def generateID(self):
         y=hashlib.sha256(str(self.id).encode()).hexdigest()
         self.unique_id=y
@@ -30,9 +31,14 @@ class Twoconfirms(models.Model):
     fromid=models.CharField(max_length=256)
     toid=models.CharField(max_length=256)
     amount=models.IntegerField()
-    imanager=models.CharField(max_length=100,choices=ch,default='pending')
+    imanagerstatus=models.CharField(max_length=100,choices=ch,default='pending')
 
 class Cmanager(models.Model):
     memid=models.CharField(max_length=256)
     memname=models.CharField(max_length=100)
     amount=models.IntegerField()
+
+class Memtransactions(models.Model):
+    memid=models.CharField(max_length=256)
+    merkleroot=models.CharField(max_length=256)
+    jsonpath=models.CharField(max_length=256)
