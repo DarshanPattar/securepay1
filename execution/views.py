@@ -46,4 +46,13 @@ def accept_propose(request):
     return render(request,'propose-confirm.html')
 
 def login(request):
+    if request.method=='POST':
+        unique_name=request.POST['username']
+        password=request.POST['password']
+        try:
+            member=Member.objects.get(unique_name=unique_name,password=password)
+            request.session['member_id'] = member.id
+            return redirect('/')
+        except Member.DoesNotExist:
+            return render(request,'login.html',{'error':'Invalid username or password'})
     return render(request,'login.html')
