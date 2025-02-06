@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .notification-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        .notification-item {
+            width: 100%;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notification-info {
+            flex-grow: 1;
+        }
+
+        .proposer-details {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .amount {
+            color: #2ecc71;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .accept-button {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .accept-button:hover {
+            background-color: #27ae60;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #1976d2;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="notification-container">
+        <ul style="list-style: none; padding: 0; width: 100%;">
+            {% for notification in tr %}
+            <li class="notification-item">
+                <div class="notification-info">
+                    <div class="proposer-details">
+                        <strong>Proposer ID:</strong> {{notification.fromid}}<br>
+                        <strong>Name:</strong> {{notification.fname}}
+                    </div>
+                    <div class="amount">Amount: {{notification.amount}}</div>
+                </div>
+                <p><a href="/accept/{{notification.id}}" class="button">Accept Transfer</a></p>
+            </li>
+            {%endfor%}
+        </ul>
+    </div>
+</body>
+</html>
