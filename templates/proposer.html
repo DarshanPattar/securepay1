@@ -71,7 +71,8 @@
 <body>
     <div class="form-container">
         <h1>Transaction Details To Propose</h1>
-        <form action="" method="post">
+        <form action="/propose/" method="post">
+            {%csrf_token%}
             <div class="form-group">
                 <p>{{ob.unique_id}}</p>
             </div>

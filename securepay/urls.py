@@ -22,9 +22,10 @@ urlpatterns = [
     path('',home,name='home'),
     path('login/',login),
     path('register/',register, name='register'),
-    path('propose/',propose),
+    path('propose/',propose,name='propose'),
     path('accept/<int:id>',accept_propose),
     path('logout/',logout, name='logout'),
     path('delmem/',delmem),
     path('cmanager/',cmanager),
+    path('transaction/',transaction_notifications,name='transaction'),
 ]

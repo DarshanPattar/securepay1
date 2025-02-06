@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from .models import *
 # Create your views here.
 def register(request):
@@ -45,7 +45,7 @@ def propose(request):
         toid=request.POST['toid']
         toname=request.POST['toname']
         amount=request.POST['amount']
-        proposer=Proposer(fromid=fromid,fname=fname,toid=toid,toname=toname,amount=amount)
+        proposer=Proposer(fromid=fromid,fname=fname,toidd=toid,toname=toname,amount=amount)
         proposer.save()
     obj=Member.objects.all()
     return render(request,'proposer.html',context={'ob':ob,'member':obj})
@@ -54,8 +54,24 @@ def receive(request):
     return render(request,'receiver.html')
 
 def accept_propose(request,id):
+    if request.method=='POST':
+        ob=Proposer.objects.get(id=id)
+        passw = request.POST['st']
+        c=Member.objects.get(id = request.session.get('member_id'))
+        if c.password==passw:
+            ob.status='accepted'
+            ob.save()
+            succobj=Twoconfirms(fromid=ob.fromid,toid=ob.toidd,amount=ob.amount)
+            succobj.save()
+            ValidateTrans(succobj)
+            return redirect('/')
+        else:
+            return HttpResponse('Invalid password')
+
     ob=Proposer.objects.get(id=id)
-    return render(request,'propose-confirm.html',context={'ob':ob})
+    return render(request,'receiver.html',context={'ob':ob})
+
+
 
 def login(request):
     if request.method=='POST':
@@ -84,6 +100,15 @@ def cmanager(request):
 
 
 def transaction_notifications(request):
-    transactions = Proposer.objects.get(toidd=request.session.get('member_id'))
+    member=Member.objects.get(id = request.session.get('member_id'))
+    transactions = Proposer.objects.filter(toidd=member.unique_id)
+    print(request.session.get('member_id'))
+    print(Proposer.objects.all())
+    if not transactions:
+        return redirect('/')
     context = {'tr':transactions}
-    return render(request,'transaction_notifications.html', context)
+    return render(request,'reciever_notification.html', context)
+
+'''Integrity manager'''
+def ValidateTrans(TCO):
+    pass

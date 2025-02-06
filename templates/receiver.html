@@ -49,18 +49,19 @@
 <body>
     <div class="rec-container">
         <h1>Accept Transaction?</h1>
-        <form class="receiver">
+        <form class="receiver" method="post" action="/accept/{{ob.id}}">
+            {%csrf_token%}
             <div class="form-elem">
-                <input type="number" placeholder="Proposer ID" name="pid">
+                <p>Sender ID: {{ob.fromid}}</p>
             </div>
             <div class="form-elem">
-                <input type="text" placeholder="Proposer name" name="pname">
+                <p>Sender Name : {{ob.fname}}</p>
             </div>
             <div class="form-elem">
-                <input type="number" placeholder="Proposed Transaction ID" name="ptid">
+                <p>Amount: {{ob.amount}}</p>
             </div>
             <div class="form-elem">
-                <input type="text" placeholder="Enter Security text" name="st">
+                <input type="password" placeholder="Enter Security text" name="st">
             </div>
             <button class="btn" type="submit" name="submit">Accept </button>
         </form>

@@ -68,6 +68,7 @@
     <div class="notification-container">
         <ul style="list-style: none; padding: 0; width: 100%;">
             {% for notification in tr %}
+            {% if notification.status == 'pending' %}
             <li class="notification-item">
                 <div class="notification-info">
                     <div class="proposer-details">
@@ -78,6 +79,7 @@
                 </div>
                 <p><a href="/accept/{{notification.id}}" class="button">Accept Transfer</a></p>
             </li>
+            {%endif%}
             {%endfor%}
         </ul>
     </div>
