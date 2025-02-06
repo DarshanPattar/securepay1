@@ -31,7 +31,12 @@ def register(request):
 def home(request):
     if 'member_id' in request.session:
         member = Member.objects.get(id=request.session.get('member_id'))
-        return render(request,'home.html', context={'member':member})
+        proposed=Proposer.objects.filter(fromid=member.unique_id)
+        confirmed=Twoconfirms.objects.filter(fromid=member.unique_id)
+        with open('databases/'+member.unique_id+'.json','r+') as f:
+            data=json.load(f)
+        transactions=data['transactions']
+        return render(request,'home.html', context={'member':member,'proposed':proposed,'confirmed':confirmed,'transactions':transactions})
     else:
         return redirect('register')
 
