@@ -81,6 +81,11 @@
             </li>
             {%endif%}
             {%endfor%}
+            {% if not tr %}
+            <div class="proposer-details">
+                <p>No transactions Available</p>
+            </div>
+            {%endif%}
         </ul>
     </div>
 </body>
