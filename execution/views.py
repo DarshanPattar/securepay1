@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import *
 from .IntegrityManager import *
+import json
 # Create your views here.
 def register(request):
     if request.method=='POST':
@@ -16,8 +17,15 @@ def register(request):
         member.save()
         member.generateID()
         member.save()
+        #create a json file
+        
+        with open('databases/'+member.unique_id+'.json','w') as f:
+            f.write('{"transactions":[]}')
         request.session['member_id'] = member.id
+        tm=Memtransactions(memid=member.unique_id,jsonpath='databases/'+member.unique_id+'.json')
+        tm.save()
         return redirect('/')
+    
     return render(request,'register-mem.html')
 
 def home(request):
@@ -31,9 +39,12 @@ def home(request):
 
 #Delete all members
 def delmem(request):
-    ob=Member.objects.all()
-    for n in ob:
-        n.delete()
+    Member.objects.all().delete()
+    Cmanager.objects.all().delete()
+    Proposer.objects.all().delete()
+    Twoconfirms.objects.all().delete()
+    Memtransactions.objects.all().delete()
+    
     return redirect('/')
 
 def logout(request):
@@ -77,6 +88,35 @@ def accept_propose(request,id):
                 sender=Member.objects.get(unique_id = ob.fromid)
                 sender.balance-=ob.amount
                 sender.save()
+                primitivestr = str(succobj.id)+str(succobj.fromid)+str(succobj.toid)+str(succobj.amount)
+                transaction_id_hash=hashlib.shake_256(str(primitivestr).encode()).hexdigest(5)
+                transaction={
+                    'id':succobj.id,
+                    'from':ob.fromid,
+                    'to':ob.toidd,
+                    'amount':ob.amount,
+                    'transaction_hash':transaction_id_hash
+                }
+                with open('databases/'+receiver.unique_id+'.json','r+') as f:
+                    data=json.load(f)
+                    data['transactions'].append(transaction)
+                    f.seek(0)
+                    json.dump(data,f)
+                    f.truncate()
+                with open('databases/'+sender.unique_id+'.json','r+') as f:
+                    data=json.load(f)
+                    data['transactions'].append(transaction)
+                    f.seek(0)
+                    json.dump(data,f)
+                    f.truncate()
+                sender_merkle=create_merkle(extract(sender.unique_id))
+                receiver_merkle=create_merkle(extract(receiver.unique_id))
+                tms=Memtransactions.objects.get(memid=sender.unique_id)
+                tms.merkleroot=sender_merkle
+                tms.save()
+                tmr=Memtransactions.objects.get(memid=receiver.unique_id)
+                tmr.merkleroot=receiver_merkle
+                tmr.save()
             else:
                 succobj.imanagerstatus='rejected'
                 succobj.save()

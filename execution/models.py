@@ -40,5 +40,5 @@ class Cmanager(models.Model):
 
 class Memtransactions(models.Model):
     memid=models.CharField(max_length=256)
-    merkleroot=models.CharField(max_length=256)
+    merkleroot=models.CharField(max_length=256,default='0')
     jsonpath=models.CharField(max_length=256)
