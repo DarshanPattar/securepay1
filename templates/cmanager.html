@@ -49,12 +49,13 @@
 <body>
     <div class="rec-container">
         <h1>Get Coins</h1>
-        <form class="receiver">
+        <form class="receiver" action="/cmanager/" method="post">
+            {%csrf_token%}
             <div class="form-elem">
-                <input type="number" placeholder="Member ID" name="pmid">
+                <p>{{member.unique_id}}</p>
             </div>
             <div class="form-elem">
-                <input type="text" placeholder="Member name" name="mname">
+                <p>{{member.unique_name}}</p>
             </div>
             <div class="form-elem">
                 <input type="number" placeholder="Required Coins" name="reqc">
