@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import *
+from .IntegrityManager import *
 # Create your views here.
 def register(request):
     if request.method=='POST':
@@ -25,7 +26,10 @@ def home(request):
         return render(request,'home.html', context={'member':member})
     else:
         return redirect('register')
-    
+
+
+
+#Delete all members
 def delmem(request):
     ob=Member.objects.all()
     for n in ob:
@@ -36,6 +40,7 @@ def logout(request):
     request.session.flush()
     return redirect('register')
 
+#Propose new transaction
 def propose(request):
     ob=Member.objects.get(id=request.session.get('member_id'))
     if request.method=='POST':
@@ -53,17 +58,28 @@ def propose(request):
 def receive(request):
     return render(request,'receiver.html')
 
+#Accepting the transaction
 def accept_propose(request,id):
     if request.method=='POST':
         ob=Proposer.objects.get(id=id)
         passw = request.POST['st']
-        c=Member.objects.get(id = request.session.get('member_id'))
-        if c.password==passw:
+        receiver=Member.objects.get(id = request.session.get('member_id'))
+        if receiver.password==passw:
             ob.status='accepted'
             ob.save()
             succobj=Twoconfirms(fromid=ob.fromid,toid=ob.toidd,amount=ob.amount)
             succobj.save()
-            ValidateTrans(succobj)
+            if(ValidateTrans(succobj)):
+                succobj.imanagerstatus='accepted'
+                succobj.save()
+                receiver.balance+=ob.amount
+                receiver.save()
+                sender=Member.objects.get(unique_id = ob.fromid)
+                sender.balance-=ob.amount
+                sender.save()
+            else:
+                succobj.imanagerstatus='rejected'
+                succobj.save()
             return redirect('/')
         else:
             return HttpResponse('Invalid password')
@@ -110,6 +126,4 @@ def transaction_notifications(request):
     context = {'tr':transactions}
     return render(request,'reciever_notification.html', context)
 
-'''Integrity manager'''
-def ValidateTrans(TCO):
-    pass
+
