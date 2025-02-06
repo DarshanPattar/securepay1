@@ -23,7 +23,7 @@ urlpatterns = [
     path('login/',login),
     path('register/',register, name='register'),
     path('propose/',propose),
-    path('accept/',accept_propose),
+    path('accept/<int:id>',accept_propose),
     path('logout/',logout, name='logout'),
     path('delmem/',delmem),
     path('cmanager/',cmanager),
