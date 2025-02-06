@@ -81,3 +81,9 @@ def cmanager(request):
         ob.balance=ob.balance+amount    
         ob.save()
     return render(request,'cmanager.html')
+
+
+def transaction_notifications(request):
+    transactions = Proposer.objects.get(toidd=request.session.get('member_id'))
+    context = {'tr':transactions}
+    return render(request,'transaction_notifications.html', context)
