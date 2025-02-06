@@ -87,16 +87,17 @@ def login(request):
 
 
 def cmanager(request):
+    member=Member.objects.get(id = request.session.get('member_id'))
     if request.method=='POST':
-        memid=request.POST['memid']
-        memname=request.POST['memname']
-        amount=request.POST['amount']
+        memid=member.unique_id
+        memname=member.unique_name
+        amount=request.POST['reqc']
         cmanager=Cmanager(memid=memid,memname=memname,amount=amount)
-        cmanager.save()
-        ob=Member.objects.get(id=memid)
-        ob.balance=ob.balance+amount    
+        ob=Member.objects.get(unique_id=memid)
+        ob.balance=ob.balance+int(amount)    
         ob.save()
-    return render(request,'cmanager.html')
+        cmanager.save()
+    return render(request,'cmanager.html',context={'member':member})
 
 
 def transaction_notifications(request):
