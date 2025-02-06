@@ -47,14 +47,15 @@ def propose(request):
         amount=request.POST['amount']
         proposer=Proposer(fromid=fromid,fname=fname,toid=toid,toname=toname,amount=amount)
         proposer.save()
-    
-    return render(request,'proposer.html',context={'ob':ob})
+    obj=Member.objects.all()
+    return render(request,'proposer.html',context={'ob':ob,'member':obj})
 
 def receive(request):
     return render(request,'receiver.html')
 
-def accept_propose(request):
-    return render(request,'propose-confirm.html')
+def accept_propose(request,id):
+    ob=Proposer.objects.get(id=id)
+    return render(request,'propose-confirm.html',context={'ob':ob})
 
 def login(request):
     if request.method=='POST':
