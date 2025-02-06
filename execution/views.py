@@ -37,15 +37,18 @@ def logout(request):
     return redirect('register')
 
 def propose(request):
+    ob=Member.objects.get(id=request.session.get('member_id'))
     if request.method=='POST':
-        fromid=request.POST['fromid']
-        fname=request.POST['fname']
+        
+        fromid=ob.unique_id
+        fname=ob.unique_name
         toid=request.POST['toid']
         toname=request.POST['toname']
         amount=request.POST['amount']
         proposer=Proposer(fromid=fromid,fname=fname,toid=toid,toname=toname,amount=amount)
         proposer.save()
-    return render(request,'proposer.html')
+    
+    return render(request,'proposer.html',context={'ob':ob})
 
 def receive(request):
     return render(request,'receiver.html')

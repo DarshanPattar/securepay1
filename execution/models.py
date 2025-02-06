@@ -14,7 +14,7 @@ class Member(models.Model):
     balance=models.IntegerField(default=0)
     intransaction=models.IntegerField(default=0)
     def generateID(self):
-        y=hashlib.sha256(str(self.id).encode()).hexdigest()
+        y=hashlib.shake_256(str(self.id).encode()).hexdigest(5)
         self.unique_id=y
     
 class Proposer(models.Model):
