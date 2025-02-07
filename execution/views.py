@@ -18,9 +18,24 @@ def register(request):
         member.generateID()
         member.save()
         #create a json file
-        
+        transaction_receiver={
+            'id':member.id,
+            'from':'cmanager',
+            'to':member.unique_id,
+            'amount':0,
+            'transaction_hash':HashStr(str(member.id)+str('cmanager')+str(member.unique_id)+str(0)),
+            'balance':member.balance,
+            'balance_hash':HashStr("")
+        }
         with open('databases/'+member.unique_id+'.json','w') as f:
             f.write('{"transactions":[]}')
+        with open('databases/'+member.unique_id+'.json','r+') as f:
+            
+            data=json.load(f)
+            data['transactions'].append(transaction_receiver)
+            f.seek(0)
+            json.dump(data,f)
+            f.truncate()
         request.session['member_id'] = member.id
         tm=Memtransactions(memid=member.unique_id,jsonpath='databases/'+member.unique_id+'.json')
         tm.save()
@@ -33,10 +48,12 @@ def home(request):
         member = Member.objects.get(id=request.session.get('member_id'))
         proposed=Proposer.objects.filter(fromid=member.unique_id)
         confirmed=Twoconfirms.objects.filter(fromid=member.unique_id)
+        
         with open('databases/'+member.unique_id+'.json','r+') as f:
             data=json.load(f)
         transactions=data['transactions']
-        return render(request,'home.html', context={'member':member,'proposed':proposed,'confirmed':confirmed,'transactions':transactions})
+        balHash = transactions[-1]['balance_hash']
+        return render(request,'home.html', context={'member':member,'proposed':proposed,'confirmed':confirmed,'transactions':transactions, 'balHash':balHash})
     else:
         return redirect('register')
 
@@ -95,22 +112,43 @@ def accept_propose(request,id):
                 sender.save()
                 primitivestr = str(succobj.id)+str(succobj.fromid)+str(succobj.toid)+str(succobj.amount)
                 transaction_id_hash=hashlib.shake_256(str(primitivestr).encode()).hexdigest(5)
-                transaction={
-                    'id':succobj.id,
-                    'from':ob.fromid,
-                    'to':ob.toidd,
-                    'amount':ob.amount,
-                    'transaction_hash':transaction_id_hash
-                }
+                sender_merkle=create_merkle(extract(sender.unique_id))
+                receiver_merkle=create_merkle(extract(receiver.unique_id))
+                tms=Memtransactions.objects.get(memid=sender.unique_id)
+                tms.merkleroot=sender_merkle
+                tms.save()
+                tmr=Memtransactions.objects.get(memid=receiver.unique_id)
+                tmr.merkleroot=receiver_merkle
+                tmr.save()
                 with open('databases/'+receiver.unique_id+'.json','r+') as f:
                     data=json.load(f)
-                    data['transactions'].append(transaction)
+                    transaction_receiver={
+                        'id':succobj.id,
+                        'from':ob.fromid,
+                        'to':ob.toidd,
+                        'amount':ob.amount,
+                        'transaction_hash':transaction_id_hash,
+                        'balance':receiver.balance,
+                        'balance_hash':HashStr(str(data['transactions'][-1]['balance_hash'])+str(receiver.balance)),
+                        'merkleroot':tms.merkleroot
+                    }
+                    data['transactions'].append(transaction_receiver)
                     f.seek(0)
                     json.dump(data,f)
                     f.truncate()
                 with open('databases/'+sender.unique_id+'.json','r+') as f:
                     data=json.load(f)
-                    data['transactions'].append(transaction)
+                    transaction_sender={
+                        'id':succobj.id,
+                        'from':ob.fromid,
+                        'to':ob.toidd,
+                        'amount':ob.amount,
+                        'transaction_hash':transaction_id_hash,
+                        'balance':sender.balance,
+                        'balance_hash':HashStr(str(data['transactions'][-1]['balance_hash'])+str(sender.balance)),
+                        'merkleroot':tmr.merkleroot
+                    }
+                    data['transactions'].append(transaction_sender)
                     f.seek(0)
                     json.dump(data,f)
                     f.truncate()
@@ -158,6 +196,21 @@ def cmanager(request):
         ob.balance=ob.balance+int(amount)    
         ob.save()
         cmanager.save()
+        with open('databases/'+ob.unique_id+'.json','r+') as f:
+            data=json.load(f)
+            transaction_receiver={
+                'id':ob.id,
+                'from':'cmanager',
+                'to':ob.unique_id,
+                'amount':amount,
+                'transaction_hash':HashStr(str(ob.id)+str('cmanager')+str(ob.unique_id)+str(amount)),
+                'balance':ob.balance,
+                'balance_hash':HashStr(str(data['transactions'][-1]['balance_hash'])+str(ob.balance))
+            }
+            data['transactions'].append(transaction_receiver)
+            f.seek(0)
+            json.dump(data,f)
+            f.truncate()
     return render(request,'cmanager.html',context={'member':member})
 
 

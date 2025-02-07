@@ -146,6 +146,8 @@
                 <p><strong>Unique Name:</strong> {{member.unique_name}}</p>
                 <p><strong>Member ID:</strong>{{member.unique_id}}</p>
                 <p><strong>Balance:</strong>{{member.balance}}</p>
+                <p><strong>Balance Hash:</strong>{{balHash}}</p>
+                
             </div>
             <a href="/logout" class="button">Logout</a>
         </div>
@@ -214,6 +216,8 @@
                 <th>From</th>
                 <th>To</th>
                 <th>Amount</th>
+                <th>Transaction verification</th>
+                <th>Merkle verification string</th>
 
             </tr>
         </thead>
@@ -224,6 +228,9 @@
                 <td>{{t.from}}</td>
                 <td>{{t.to}}</td>
                 <td>{{t.amount}}</td>
+                <td>{{t.transaction_hash}}</td>
+                <td>{{t.merkleroot}}..</td>
+
 
             </tr>
             {% endfor %}
