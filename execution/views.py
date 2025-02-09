@@ -53,7 +53,8 @@ def home(request):
         
         with open('databases/'+member.unique_id+'.json','r+') as f:
             data=json.load(f)
-        transactions=data['transactions']
+        transactions=data['transactions'][::-1][:5]
+
         balHash = transactions[-1]['balance_hash']
         return render(request,'home.html', context={'member':member,'proposed':proposed,'confirmed':confirmed,'transactions':transactions, 'balHash':balHash})
     else:
@@ -229,3 +230,9 @@ def transaction_notifications(request):
     return render(request,'reciever_notification.html', context)
 
 
+def about(request):
+    return render(request,'about.html')
+
+def profile(request):
+    member=Member.objects.get(id = request.session.get('member_id'))
+    return render(request,'member-profile.html',context={'member':member})

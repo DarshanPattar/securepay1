@@ -1,236 +1,280 @@
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Home Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f0f2f5;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            gap: 20px;
-        }
-        .main-content {
-            flex: 1;
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .profile-card {
-            width: 300px;
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            height: fit-content;
-            margin-bottom: 20px;
-        }
-        .profile-card1 {
-            width: 300px;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            height: fit-content;
-            margin-bottom: 20px;
-            margin-top: 20px;
-        }
-        .option-box {
-            padding: 20px;
-            margin: 20px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            transition: transform 0.2s;
-        }
-        .option-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        .propose-option {
-            background-color: #e3f2fd;
-        }
-        .accept-option {
-            background-color: #e8f5e9;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 30px;
-        }
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #1976d2;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        .button:hover {
-            background-color: #1565c0;
-        }
-        .transaction-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.transaction-table th {
-    background-color: #2c3e50;
-    color: white;
-    padding: 12px;
-    text-align: left;
-    font-weight: 600;
-}
-
-.transaction-table td {
-    padding: 12px;
-    border-bottom: 1px solid #eee;
-}
-
-.transaction-table tr:hover {
-    background-color: #f5f7fa;
-    transition: background-color 0.2s ease;
-}
-
-.transaction-table tr:last-child td {
-    border-bottom: none;
-}
-
-.table-container {
-    margin: 30px 0;
-    padding: 0 20px;
-}
-
-.table-title {
-    font-size: 1.2em;
-    color: #2c3e50;
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-    </style>
-</head>
-<div class="container">
-    <div class="main-content">
-        <h1>Welcome to SecurePay</h1>
+  <!DOCTYPE html>
+  <html>
+  <head>
+      <title>Home Page</title>
+      <style>
+          body {
+              font-family: Arial, sans-serif;
+              margin: 0;
+              padding: 0;
+              line-height: 1.6;
+              background-color: #f0f2f5;
+          }
+          .navbar {
+              background-color: #2c3e50;
+              padding: 15px 0;
+              position: sticky;
+              top: 0;
+              z-index: 1000;
+              box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+          }
+          .nav-container {
+              max-width: 1200px;
+              margin: 0 auto;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 0 20px;
+          }
+          .nav-brand {
+              color: white;
+              font-size: 24px;
+              font-weight: bold;
+              text-decoration: none;
+          }
+          .nav-links {
+              display: flex;
+              gap: 20px;
+          }
+          .nav-links a {
+              color: white;
+              text-decoration: none;
+              padding: 8px 16px;
+              border-radius: 4px;
+              transition: background-color 0.3s;
+          }
+          .nav-links a:hover {
+              background-color: #34495e;
+          }
+          .nav-links a.active {
+              background-color: #1976d2;
+          }
+          .container {
+              max-width: 1200px;
+              margin: 20px auto;
+              display: flex;
+              gap: 20px;
+          }
+          .main-content {
+              flex: 1;
+              background-color: white;
+              padding: 30px;
+              border-radius: 10px;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          }
+          .profile-card {
+              width: 300px;
+              background-color: white;
+              padding: 30px;
+              border-radius: 10px;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+              height: fit-content;
+              margin-bottom: 20px;
+          }
+          .profile-card1 {
+              width: 300px;
+              background-color: white;
+              padding: 20px;
+              border-radius: 10px;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+              height: fit-content;
+              margin-bottom: 20px;
+              margin-top: 20px;
+          }
+          .option-box {
+              padding: 20px;
+              margin: 20px 0;
+              border: 1px solid #ddd;
+              border-radius: 5px;
+              transition: transform 0.2s;
+          }
+          .option-box:hover {
+              transform: translateY(-5px);
+              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+          .propose-option {
+              background-color: #e3f2fd;
+          }
+          .accept-option {
+              background-color: #e8f5e9;
+          }
+          h1 {
+              text-align: center;
+              color: #333;
+              margin-bottom: 30px;
+          }
+          .button {
+              display: inline-block;
+              padding: 10px 20px;
+              background-color: #1976d2;
+              color: white;
+              text-decoration: none;
+              border-radius: 5px;
+              transition: background-color 0.3s;
+          }
+          .button:hover {
+              background-color: #1565c0;
+          }
+          .transaction-table {
+              width: 100%;
+              border-collapse: collapse;
+              margin: 20px 0;
+              box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+              background: white;
+              border-radius: 8px;
+              overflow: hidden;
+          }
+          .transaction-table th {
+              background-color: #2c3e50;
+              color: white;
+              padding: 12px;
+              text-align: left;
+              font-weight: 600;
+          }
+          .transaction-table td {
+              padding: 12px;
+              border-bottom: 1px solid #eee;
+          }
+          .transaction-table tr:hover {
+              background-color: #f5f7fa;
+              transition: background-color 0.2s ease;
+          }
+          .transaction-table tr:last-child td {
+              border-bottom: none;
+          }
+          .table-container {
+              margin: 30px 0;
+              padding: 0 20px;
+          }
+          .table-title {
+              font-size: 1.2em;
+              color: #2c3e50;
+              margin-bottom: 15px;
+              font-weight: 600;
+          }
+      </style>
+  </head>
+  <body>
+  <nav class="navbar">
+      <div class="nav-container">
+          <a href="/" class="nav-brand">SecurePay</a>
+          <div class="nav-links">
+              <a href="/" class="active">Home</a>
+              <a href="/about">About</a>
+              <a href="/profile">Profile</a>
+          </div>
+      </div>
+  </nav>
+  <div class="container">
+      <div class="main-content">
+          <h1>Welcome to SecurePay</h1>
             
-        <div class="option-box propose-option">
-            <h2>Propose a New Transaction</h2>
-            <p>Wnat to propose a transaction to someone?</p>
-            <a href="/propose" class="button">Make a Proposal</a>
-        </div>
+          <div class="option-box propose-option">
+              <h2>Propose a New Transaction</h2>
+              <p>Wnat to propose a transaction to someone?</p>
+              <a href="/propose" class="button">Make a Proposal</a>
+          </div>
 
-        <div class="option-box accept-option">
-            <h2>Accept Proposals</h2>
-            <p>Someone sent you a proposal! Want to accept??</p>
-            <a href="/transaction/" class="button">accept</a>
-        </div>
-    </div>
+          <div class="option-box accept-option">
+              <h2>Accept Proposals</h2>
+              <p>Someone sent you a proposal! Want to accept??</p>
+              <a href="/transaction/" class="button">accept</a>
+          </div>
+      </div>
         
-    <div>
-        <div class="profile-card">
-            <h2>Profile</h2>
-            <div class="profile-info">
-                <p><strong>Name:</strong> {{member.name}}</p>
-                <p><strong>Unique Name:</strong> {{member.unique_name}}</p>
-                <p><strong>Member ID:</strong>{{member.unique_id}}</p>
-                <p><strong>Balance:</strong>{{member.balance}}</p>
-                <p><strong>Balance Hash:</strong>{{balHash}}</p>
+      <div>
+          <div class="profile-card">
+              <h2>Profile</h2>
+              <div class="profile-info">
+                  <p><strong>Name:</strong> {{member.name}}</p>
+                  <p><strong>Unique Name:</strong> {{member.unique_name}}</p>
+                  <p><strong>Member ID:</strong>{{member.unique_id}}</p>
+                  <p><strong>Balance:</strong>{{member.balance}}</p>
+                  <p><strong>Balance Hash:</strong>{{balHash}}</p>
                 
-            </div>
-            <a href="/logout" class="button">Logout</a>
-        </div>
+              </div>
+              <a href="/logout" class="button">Logout</a>
+          </div>
         
-        <div class="profile-card">
-            <p>Want to get more Coins?</p>
-            <a href="/cmanager/" class="button">Get Coins</a>
-        </div>
-    </div>
+          <div class="profile-card">
+              <p>Want to get more Coins?</p>
+              <a href="/cmanager/" class="button">Get Coins</a>
+          </div>
+      </div>
         
-</div>
-<div class="table-container">
-    <h3 class="table-title">Proposed Transactions</h3>
-    <table class="transaction-table">
-        <thead>
-            <tr>
-                <th>From</th>
-                <th>To</th>
-                <th>Amount</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for p in proposed %}
-            <tr>
-                <td>{{p.fname}}</td>
-                <td>{{p.toname}}</td>
-                <td>{{p.amount}}</td>
-                <td>Proposed</td>
-            </tr>
-            {% endfor %}
-            {% for p in confirmed %}
-            <tr>
-                <td>{{p.fromid}}</td>
-                <td>{{p.toid}}</td>
-                <td>{{p.amount}}</td>
-                <td>confirmed</td>
-            </tr>
-            {% endfor %}
-            {% for p in transactions %}
-            <tr>
-                <td>{{p.from}}</td>
-                <td>{{p.to}}</td>
-                <td>{{p.amount}}</td>
-                <td>verified</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+  </div>
+  <div class="table-container">
+      <h3 class="table-title">Recent Transactions</h3>
+      <table class="transaction-table">
+          <thead>
+              <tr>
+                  <th>From</th>
+                  <th>To</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for p in proposed %}
+              <tr>
+                  <td>{{p.fname}}</td>
+                  <td>{{p.toname}}</td>
+                  <td>{{p.amount}}</td>
+                  <td>Proposed</td>
+              </tr>
+              {% endfor %}
+              {% for p in confirmed %}
+              <tr>
+                  <td>{{p.fromid}}</td>
+                  <td>{{p.toid}}</td>
+                  <td>{{p.amount}}</td>
+                  <td>confirmed</td>
+              </tr>
+              {% endfor %}
+              {% for p in transactions %}
+              <tr>
+                  <td>{{p.from}}</td>
+                  <td>{{p.to}}</td>
+                  <td>{{p.amount}}</td>
+                  <td>verified</td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+  </div>
 
-<div class="table-container">
-    <h3 class="table-title">Transaction History</h3>
-    <table class="transaction-table">
-        <thead>
-            <tr>
+  <div class="table-container">
+      <h3 class="table-title">Transaction History</h3>
+      <table class="transaction-table">
+          <thead>
+              <tr>
                
-                <th>From</th>
-                <th>To</th>
-                <th>Amount</th>
-                <th>Transaction verification</th>
-                <th>Merkle verification string</th>
-                <th>Time stamp</th>
+                  <th>From</th>
+                  <th>To</th>
+                  <th>Amount</th>
+                  <th>Transaction verification</th>
+                  <th>Merkle verification string</th>
+                  <th>Time stamp</th>
 
-            </tr>
-        </thead>
-        <tbody>
-            {% for t in transactions %}
-            <tr>
+              </tr>
+          </thead>
+          <tbody>
+              {% for t in transactions %}
+              <tr>
 
-                <td>{{t.from}}</td>
-                <td>{{t.to}}</td>
-                <td>{{t.amount}}</td>
-                <td>{{t.transaction_hash}}</td>
-                <td>{{t.merkleroot}}..</td>
-                <td>{{t.time}}</td>
+                  <td>{{t.from}}</td>
+                  <td>{{t.to}}</td>
+                  <td>{{t.amount}}</td>
+                  <td>{{t.transaction_hash}}</td>
+                  <td>{{t.merkleroot}}..</td>
+                  <td>{{t.time}}</td>
 
 
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+  </div>
 
-</body>
-</html>
+  </body>
+  </html>

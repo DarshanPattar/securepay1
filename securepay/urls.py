@@ -28,4 +28,6 @@ urlpatterns = [
     path('delmem/',delmem),
     path('cmanager/',cmanager,name='cmanager'),
     path('transaction/',transaction_notifications,name='transaction'),
+    path('about/', about, name='about'),
+    path('profile/', profile, name='profile')
 ]
