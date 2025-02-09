@@ -176,31 +176,23 @@
                 <td>{{p.fname}}</td>
                 <td>{{p.toname}}</td>
                 <td>{{p.amount}}</td>
-                <td>{{p.status}}</td>
+                <td>Proposed</td>
             </tr>
             {% endfor %}
-        </tbody>
-    </table>
-</div>
-
-<div class="table-container">
-    <h3 class="table-title">Confirmed Transactions</h3>
-    <table class="transaction-table">
-        <thead>
+            {% for p in confirmed %}
             <tr>
-                <th>From ID</th>
-                <th>To ID</th>
-                <th>Amount</th>
-                <th>Status</th>
+                <td>{{p.fromid}}</td>
+                <td>{{p.toid}}</td>
+                <td>{{p.amount}}</td>
+                <td>confirmed</td>
             </tr>
-        </thead>
-        <tbody>
-            {% for c in confirmed %}
+            {% endfor %}
+            {% for p in transactions %}
             <tr>
-                <td>{{c.fromid}}</td>
-                <td>{{c.toid}}</td>
-                <td>{{c.amount}}</td>
-                <td>{{c.imanagerstatus}}</td>
+                <td>{{p.from}}</td>
+                <td>{{p.to}}</td>
+                <td>{{p.amount}}</td>
+                <td>verified</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -218,6 +210,7 @@
                 <th>Amount</th>
                 <th>Transaction verification</th>
                 <th>Merkle verification string</th>
+                <th>Time stamp</th>
 
             </tr>
         </thead>
@@ -230,6 +223,7 @@
                 <td>{{t.amount}}</td>
                 <td>{{t.transaction_hash}}</td>
                 <td>{{t.merkleroot}}..</td>
+                <td>{{t.time}}</td>
 
 
             </tr>

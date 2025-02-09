@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from .models import *
 from .IntegrityManager import *
 import json
+from datetime import datetime
 # Create your views here.
 def register(request):
     if request.method=='POST':
@@ -25,7 +26,8 @@ def register(request):
             'amount':0,
             'transaction_hash':HashStr(str(member.id)+str('cmanager')+str(member.unique_id)+str(0)),
             'balance':member.balance,
-            'balance_hash':HashStr("")
+            'balance_hash':HashStr(""),
+            'time':datetime.now().isoformat()
         }
         with open('databases/'+member.unique_id+'.json','w') as f:
             f.write('{"transactions":[]}')
@@ -130,7 +132,8 @@ def accept_propose(request,id):
                         'transaction_hash':transaction_id_hash,
                         'balance':receiver.balance,
                         'balance_hash':HashStr(str(data['transactions'][-1]['balance_hash'])+str(receiver.balance)),
-                        'merkleroot':tms.merkleroot
+                        'merkleroot':tms.merkleroot,
+                        'time':datetime.now().isoformat(),
                     }
                     data['transactions'].append(transaction_receiver)
                     f.seek(0)
@@ -146,7 +149,8 @@ def accept_propose(request,id):
                         'transaction_hash':transaction_id_hash,
                         'balance':sender.balance,
                         'balance_hash':HashStr(str(data['transactions'][-1]['balance_hash'])+str(sender.balance)),
-                        'merkleroot':tmr.merkleroot
+                        'merkleroot':tmr.merkleroot,
+                        'time':datetime.now().isoformat()
                     }
                     data['transactions'].append(transaction_sender)
                     f.seek(0)
