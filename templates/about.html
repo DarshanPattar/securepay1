@@ -1,0 +1,149 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>About - Secure Payment System</title>
+      <style>
+          body {
+              font-family: Arial, sans-serif;
+              line-height: 1.6;
+              margin: 0;
+              background-color: #f5f5f5;
+          }
+          .navbar {
+            background-color: #2c3e50;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .nav-brand {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .nav-links a:hover {
+            background-color: #34495e;
+        }
+        .nav-links a.active {
+            background-color: #1976d2;
+        }
+          .container {
+              max-width: 800px;
+              margin: 0 auto;
+              background-color: white;
+              padding: 30px;
+              border-radius: 10px;
+              box-shadow: 0 0 10px rgba(0,0,0,0.1);
+          }
+          h1 {
+              color: #2c3e50;
+              text-align: center;
+              margin-bottom: 30px;
+          }
+          h2 {
+              color: #34495e;
+              margin-top: 25px;
+          }
+          .feature-box {
+              background-color: #f8f9fa;
+              padding: 20px;
+              border-radius: 5px;
+              margin: 15px 0;
+          }
+          .btn {
+              display: inline-block;
+              padding: 10px 20px;
+              background-color: #2c3e50;
+              color: white;
+              text-decoration: none;
+              border-radius: 5px;
+              margin-top: 20px;
+          }
+          .btn:hover {
+              background-color: #34495e;
+          }
+      </style>
+  </head>
+  <body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">SecurePay</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/about" class="active">About</a>
+                <a href="/profile">Profile</a>
+            </div>
+        </div>
+    </nav>
+      <div class="container">
+          <h1>About Secure Payment System</h1>
+        
+          <div class="feature-box">
+              <h2>Project Overview</h2>
+              <p>This secure payment application leverages the power of Merkle Trees to ensure the integrity and security of all transactions.
+                 Our system provides a robust and efficient way to verify payments while maintaining the highest standards of security.</p>
+          </div>
+
+          <div class="feature-box">
+              <h2>What is a Merkle Tree?</h2>
+              <p>A Merkle Tree is a fundamental data structure in cryptography where each non-leaf node is a hash of its child nodes. In our payment system, this structure allows for efficient and secure verification of transactions, ensuring that payment data cannot be tampered with.</p>
+          </div>
+
+          <div class="feature-box">
+              <h2>Key Features</h2>
+              <ul>
+                  <li>Secure transaction verification using Merkle Tree architecture</li>
+                  <li>Efficient payment processing with cryptographic proof</li>
+                  <li>Tamper-evident transaction history</li>
+                  <li>Enhanced security through multi-verification</li>
+              </ul>
+          </div>
+
+          <div class="feature-box">
+              <h2>Security Benefits</h2>
+              <p>By implementing Merkle Trees, our payment system achieves:</p>
+              <ul>
+                  <li>Two side verification of payment authenticity</li>
+                  <li>Protection against unauthorized modifications</li>
+                  <li>Efficient batch verification of multiple transactions</li>
+                  <li>Verifiable balance hash</li>
+              </ul>
+          </div>
+
+          <div class="feature-box">
+              <h2>How It Works</h2>
+              <p>When a payment is processed, it is added as a leaf node to our Merkle Tree. 
+                The system then generates a new Merkle root hash, which serves as a unique identifier for the entire 
+                transaction set. This allows for quick verification of any transaction's authenticity without needing to 
+                process the entire payment history. There is a second mode of verification that is the balance hash we calculate
+            , it is done after every transaction is performed. It can be verified by taking the history of transaction, if the 
+        balance hash does not match the calculated hash, then the transaction has been modified.</p>
+          </div>
+
+          <a href="/" class="btn">Back to Home</a>
+      </div>
+  </body>
+  </html>
